@@ -1,0 +1,75 @@
+/*
+This is a CellBuilder-like file written for the simulator NEURON
+by an automatic procedure "neuron_template_tree" 
+in MATLAB, based on a script of Hermann Cuntz
+copyright 2014 Marcel Beining
+*/
+
+begintemplate cell_mouse_matGC_art_1
+
+proc celldef() {
+  topol()
+  subsets()
+  geom()
+  biophys()
+  geom_nseg()
+is_artificial = 0
+}
+
+public soma
+
+public allregobj
+public allreg
+public alladendreg
+public allaxonreg
+public regsoma
+public is_artificial
+
+create soma[1]
+
+proc topol_1() {
+}
+proc topol() {
+  topol_1()
+  basic_shape()
+}
+
+proc shape3d_1() {
+  soma[0] {pt3dclear()
+    pt3dadd(-0.0001, 0, 0, 15)
+    pt3dadd(0, 0, 0, 15)
+    pt3dadd(15, 0, 0, 15)
+  }
+}
+proc basic_shape() {
+  shape3d_1()
+}
+
+objref allreg, allregobj, alladendreg, allaxonreg, sec
+objref regsoma
+proc subsets() { local ward
+  allregobj = new List()
+  allreg = new SectionList()
+  alladendreg = new SectionList()
+  allaxonreg = new SectionList()
+  regsoma = new SectionList()
+  for ward = 0, 0 soma[ward] {
+    regsoma.append()
+    sec = new SectionRef()
+    allregobj.append(sec)
+    allreg.append()
+  }
+}
+proc geom() {
+}
+proc geom_nseg() {
+}
+proc biophys() {
+}
+access soma
+proc init() {
+  celldef()
+}
+
+endtemplate cell_mouse_matGC_art_1
+
